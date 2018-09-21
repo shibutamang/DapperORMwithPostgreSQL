@@ -41,7 +41,7 @@ namespace ORM.Web.Repository
             using (IDbConnection connection = Connection)
             {
                 connection.Open();
-                return connection.Query<Customer>("SELECT * FROM customer WHERE id = @Id", new { Id = id }).FirstOrDefault();
+                return connection.Query<Customer>("SELECT * FROM customer WHERE id = @Id", new { Id = id }).SingleOrDefault();
             }
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using ORM.Web.Models;
 using ORM.Web.Repository;
 
 namespace ORM.Web.Controllers
@@ -21,6 +22,21 @@ namespace ORM.Web.Controllers
         {
             var customers = await _repository.GetAllAsync();
             return View(customers);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var customer = _repository.Get(id);
+            return View(customer);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Customer customer)
+        {
+            _repository.Update(customer);
+            return RedirectToAction("Index");
+
         }
     }
 }
